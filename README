@@ -1,0 +1,38 @@
+social arxiv front-end. now with free artificial intelligence (tm)!
+
+todo :
+
+(iteration 0 "the mvp")
+
+list all abstracts from arxiv on a page by chronology / topic, link to arxiv page
+  * web.py, mongodb
+  - / -- home page, with button to get latest abstracts
+automate testing, deployment
+  * chef or fabric or puppet
+  ./deploy.py
+keyword search through abstracts
+  * nltk for stemming
+  ./do-keywords.py
+  - / -- add search box on homepage
+  - /find/keywords -- search
+  - /find <- POST (keywords: ...,  authors:  ..., etc ... )
+click "similar" link to show similar articles
+  * scipy + numpy for n-gram frequencies comparison
+  ./do-similar.py
+  - /similar/article-id1&article-id2&... 
+  - /similar <- POST (like: [... articles ...] , unlike: [... articles ...], authors: [ ... ])
+nice simple CSS style & favicon, domain name
+  - /style.css
+  - /favicon.ico
+click title to see details 
+  - /id/article-id -- show article abstract, quickview, comments, votes, whatever
+click "+" link to vote up an article (clickpass login)
+  - /login  -- show clickpass
+  - /vote/article-id  -- votes up
+job-queue for continuously running system tasks 
+  * pyres
+  ./fork-updater.py
+
+done:
+
+
