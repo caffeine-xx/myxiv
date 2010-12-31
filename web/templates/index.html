@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}home{% endblock %}
+{% block content %}
+   <form action="/search" method="get">
+    <input class="size-large" size="40" type="text" name="q" value="articles" />
+    <input class="size-x-large" type="submit" value="search" />
+  </form>
+  <p>{% for x in range(1992,2011): %}
+    <a href="/y/{{x}}">{{x}}</a>
+    {% endfor %}
+  </p>
+  <p>{% for x in sets: %}
+    <a href="/s/{{x}}">{{x}}</a>
+    {% endfor %}
+  </p>
+ <ul>
+  {% for a in articles: %}
+  <li>{{a['date']}}:{{a['title']}}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

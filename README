@@ -4,9 +4,6 @@ todo :
 
 (iteration 0 "the mvp")
 
-list all abstracts from arxiv on a page by chronology / topic, link to arxiv page
-  * web.py, mongodb
-  - / -- home page, with button to get latest abstracts
 automate testing, deployment
   * chef or fabric or puppet
   ./deploy.py
@@ -35,4 +32,13 @@ job-queue for continuously running system tasks
 
 done:
 
+list all abstracts from arxiv on a page by chronology / topic, link to arxiv page
+  * flask, mongodb
+  - / -- home page
+
+eggs:
+
+- Flask
+- pymongo
+- lxml
 
