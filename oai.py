@@ -1,5 +1,9 @@
 import urllib2
 from lxml import etree, objectify
+""" An ultra-simple OAI-PMH client library
+    Returns results as 
+        - objectify trees
+        - SON (e.g. maps and arrays) """
 
 def dc(s=""):
     return '{http://purl.org/dc/elements/1.1/}' + s
