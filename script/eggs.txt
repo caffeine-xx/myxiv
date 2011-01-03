@@ -3,3 +3,4 @@ lxml
 mongoengine
 pymongo
 json
+nltk
