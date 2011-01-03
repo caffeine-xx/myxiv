@@ -89,7 +89,7 @@ def test_arxiv_to_article():
     testdb.drop_collection("arxiv")
     testdb.drop_collection("article")
     testdb.arxiv.insert(records)
-    
+ 
     # try to import them all as articles
     t0 = time.time()
     failed = mongo_map(lambda x: arxiv_to_article(x,True), testdb.arxiv.find())
