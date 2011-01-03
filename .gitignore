@@ -1,4 +1,5 @@
 mongo
 data
+bin
 **.sw*
 **.pyc
