@@ -3,16 +3,15 @@ social arxiv front-end. now with free artificial intelligence (tm)!
 todo :
 
 (iteration 0 "the mvp")
-
-automate testing, deployment
-  * chef or fabric or puppet
-  ./deploy.py
 keyword search through abstracts
-  * nltk for stemming
+  * nltk for stemming: build ngram tables, get distribution over all
+    documents, use likelihood ratio of doc to corpus ngram distribution
+    to rank words importance
   ./do-keywords.py
   - / -- add search box on homepage
   - /find/keywords -- search
   - /find <- POST (keywords: ...,  authors:  ..., etc ... )
+
 click "similar" link to show similar articles
   * scipy + numpy for n-gram frequencies comparison
   ./do-similar.py
@@ -25,6 +24,9 @@ click title to see details
   - /id/article-id -- show article abstract, quickview, comments, votes, whatever
 click "+" link to vote up an article (clickpass login)
   - /login  -- show clickpass
+automate testing, deployment
+  * chef or fabric or puppet
+  ./deploy.py
   - /vote/article-id  -- votes up
 job-queue for continuously running system tasks 
   * pyres
@@ -41,4 +43,20 @@ eggs:
 - Flask
 - pymongo
 - lxml
+
+notes:
+
+(keyword search):
+  for each document:
+  - descriptions -> sentence tokenizer
+  - sentences -> word tokenizer
+  - words -> ngrams pdf 
+  - words -> stems -> stemgrams pdf
+  for corpus:
+  - compute corpus-wide ngrams pdf
+  - compute corpus-wide stemgrams pdf
+  for each document:
+  - ln p(ngram|doc) - ln p(ngram|corpus) # ngram relevance
+  - ln p(sgram|doc) - ln p(sgram|corpus) # sgram relevance
+  - ln p(ngram|doc) - sum(ln p(1gram_i|corpus)) # ngram importance
 
