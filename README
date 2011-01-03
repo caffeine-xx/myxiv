@@ -3,6 +3,7 @@ social arxiv front-end. now with free artificial intelligence (tm)!
 todo :
 
 (iteration 0 "the mvp")
+
 keyword search through abstracts
   * nltk for stemming: build ngram tables, get distribution over all
     documents, use likelihood ratio of doc to corpus ngram distribution
@@ -46,6 +47,9 @@ eggs:
 
 notes:
 
+(arxiv normalization):
+  see schema.py, using mongoengine 
+  
 (keyword search):
   for each document:
   - descriptions -> sentence tokenizer
