@@ -1,7 +1,8 @@
 #!/bin/bash
 
-BASEDIR=/Users/dan/Code/myxiv/mongo
-PROGRAM=/usr/local/bin/mongod
+
+BASEDIR=./mongo
+PROGRAM=./bin/mongod
 
 start_mongo () 
 {
@@ -32,6 +33,7 @@ stop_mongo ()
 }
 
 if test ! -d $BASEDIR; then
+  echo "No dir $BASEDIR"
   if mkdir -p $BASEDIR; then
     echo "Created $BASEDIR"
   else
