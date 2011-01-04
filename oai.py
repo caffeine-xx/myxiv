@@ -1,5 +1,6 @@
 import urllib2
 from lxml import etree, objectify
+from transforms import merge
 """ An ultra-simple OAI-PMH client library
     Returns results as 
         - objectify trees
@@ -13,17 +14,6 @@ def oai_dc(s=""):
     return '{http://www.openarchives.org/OAI/2.0/oai_dc/}' + s
 def path(expr):
     return objectify.ObjectPath(expr)
-
-def merge(items, map=None):
-    if not map: map=dict()
-    for k,v in items:
-        if not map.has_key(k):
-            map[k] = v
-        elif map.has_key(k) and not isinstance(map[k],list):
-            map[k] = [map[k],v]
-        elif map.has_key(k) and isinstance(map[k],list):
-            map[k].append(v)
-    return map
 
 def children_to_list(elem, ns=""):
     ls = []

@@ -1,5 +1,7 @@
 import pymongo, nltk, time
 from transforms import *
+import transforms
+reload(transforms)
 from nose import with_setup
 import schema
 
@@ -99,4 +101,11 @@ def test_arxiv_to_article():
     # Check they all made it
     assert failed==[], "No fails"
     assert testdb.article.count()==testdb.arxiv.count(), ("arxiv count ",testdb.arxiv.count(),", got article count ", testdb.article.count())
+
+def test_merge():
+    items = [('a','b'),('a','c'),('b','c')]
+    result = {'a':['b','c'],'b':'c'}
+    merged = transforms.merge(items)
+    assert result==merged, ("Required, got: ", result, merged)
+
 

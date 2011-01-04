@@ -1,5 +1,19 @@
 from mongoengine import *
 
+def myxiv_connect():
+    myxiv = connect('myxiv',host='localhost',port=27017)
+    build_indices(myxiv)
+    return myxiv
+
+def build_indices(db):
+    unique_idx = ['url','identifiers']
+    normal_idx = ['tags','published_on','description.ngram_prob']
+    # Indices
+    map(lambda i: db.article.ensure_index(i,drop_dups=True),
+                unique_idx)
+    map(lambda i: db.article.ensure_index(i,drop_dups=False),
+                normal_idx)
+
 class Ngrams(EmbeddedDocument):
     sentences = ListField(StringField())
     words     = ListField(StringField())

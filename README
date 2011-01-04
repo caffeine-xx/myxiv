@@ -3,16 +3,6 @@ social arxiv front-end. now with free artificial intelligence (tm)!
 todo :
 
 (iteration 0 "the mvp")
-
-keyword search through abstracts
-  * nltk for stemming: build ngram tables, get distribution over all
-    documents, use likelihood ratio of doc to corpus ngram distribution
-    to rank words importance
-  ./do-keywords.py
-  - / -- add search box on homepage
-  - /find/keywords -- search
-  - /find <- POST (keywords: ...,  authors:  ..., etc ... )
-
 click "similar" link to show similar articles
   * scipy + numpy for n-gram frequencies comparison
   ./do-similar.py
@@ -38,6 +28,10 @@ done:
 list all abstracts from arxiv on a page by chronology / topic, link to arxiv page
   * flask, mongodb
   - / -- home page
+keyword search through abstracts
+  * build ngram tables, documents with keywords, years, tags
+  - / -- add search box on homepage
+  - /s?q=k:word t:tag y:year -- search
 
 eggs:
 
