@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 BASEDIR=./mongo
 PROGRAM=./bin/mongod
 

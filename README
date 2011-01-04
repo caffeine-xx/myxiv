@@ -1,11 +1,39 @@
 social arxiv front-end. now with free artificial intelligence (tm)!
 
-todo :
-
 (iteration 0 "the mvp")
-click "similar" link to show similar articles
+-- todo: --
+
+search queries grammar
+  txt      <- (ngram "txt")
+  "a b"    <- (ngram "a b")
+  t:tag    <- (tag "tag")
+  y:YYYY   <- (> year YYYY)
+  e1 e2    <- (and e1 e2) 
+
+modify schema: $exists can't use an index
+
+
+rank articles by relevance
+  - order by sum of predicate log-likelihoods
+
+deploy to amazon ec2
+  * virtualenv, fabric
+  - set up ebs for mongo
+  - bootstrap, load-arxiv
+
+-- done: --
+list all abstracts from arxiv on a page by chronology / topic, link to arxiv page
+  * flask, mongodb
+  - / -- home page
+keyword search through abstracts
+  * build ngram tables, documents with keywords, years, tags
+  - / -- add search box on homepage
+  - /s?q=k:word t:tag y:year -- search
+
+(iteration 1 "the basics")
+-- todo: --
+"similar" link to show similar articles
   * scipy + numpy for n-gram frequencies comparison
-  ./do-similar.py
   - /similar/article-id1&article-id2&... 
   - /similar <- POST (like: [... articles ...] , unlike: [... articles ...], authors: [ ... ])
 nice simple CSS style & favicon, domain name
@@ -15,35 +43,30 @@ click title to see details
   - /id/article-id -- show article abstract, quickview, comments, votes, whatever
 click "+" link to vote up an article (clickpass login)
   - /login  -- show clickpass
-automate testing, deployment
-  * chef or fabric or puppet
-  ./deploy.py
-  - /vote/article-id  -- votes up
-job-queue for continuously running system tasks 
-  * pyres
-  ./fork-updater.py
+auto-updating of database with new entries
+  - update-job.py
 
-done:
+required eggs:
 
-list all abstracts from arxiv on a page by chronology / topic, link to arxiv page
-  * flask, mongodb
-  - / -- home page
-keyword search through abstracts
-  * build ngram tables, documents with keywords, years, tags
-  - / -- add search box on homepage
-  - /s?q=k:word t:tag y:year -- search
-
-eggs:
-
-- Flask
-- pymongo
-- lxml
+Flask - web framework
+mongoengine - mongo schemas
+lxml - xml parsing
+nltk - natural language processing
+lepl - search query parsing
 
 notes:
 
-(arxiv normalization):
-  see schema.py, using mongoengine 
-  
+(query language):
+  txt      <- (1gram "txt")
+  "a b"    <- (2gram "a b")
+  t:tag    <- (tag "tag")
+  y:YYYY   <- (> year YYYY)
+  +e       <- (must e)
+  e1 e2    <- (and e1 e2) 
+  e1 & e2  <- (and e1 e2)
+  -e       <- (not e)
+  e1 | e2  <- (or e1 e2)
+
 (keyword search):
   for each document:
   - descriptions -> sentence tokenizer

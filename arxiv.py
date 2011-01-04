@@ -49,9 +49,8 @@ def oai_stream(base_url,verb,token=None,inc=0,prefix="oai_dc",range=None):
 
 def run_stream(out_prefix, mongo_coll, token=None, inc=0):
     for inc, tree in stream_oai_results(oai.arxiv,"ListRecords",token=token,inc=inc):
-        out_file = out_prefix + "-records-" + str(inc) + ".xml"
+        out_file = out_prefix + str(inc) + ".xml"
         write_file(out_file, tree)
-        write_mongo(mongo_coll, tree)
 
 def run_file(mongo_coll, filename):
     in_file = open(filename)

@@ -1,18 +1,16 @@
 from mongoengine import *
+import datetime 
 
-def myxiv_connect():
-    myxiv = connect('myxiv',host='localhost',port=27017)
-    build_indices(myxiv)
-    return myxiv
+def db_connect(db_name='myxiv'):
+    db = connect(db_name,host='localhost',port=27017)
+    return db
 
-def build_indices(db):
+def ensure_article_indices(db):
     unique_idx = ['url','identifiers']
     normal_idx = ['tags','published_on','description.ngram_prob']
     # Indices
-    map(lambda i: db.article.ensure_index(i,drop_dups=True),
-                unique_idx)
-    map(lambda i: db.article.ensure_index(i,drop_dups=False),
-                normal_idx)
+    map(lambda i: db.article.ensure_index(i,drop_dups=True),unique_idx)
+    map(lambda i: db.article.ensure_index(i,drop_dups=False),normal_idx)
 
 class Ngrams(EmbeddedDocument):
     sentences = ListField(StringField())
@@ -34,4 +32,4 @@ class Article(Document):
     description = EmbeddedDocumentField(Ngrams)
     metadata = DictField()  # {anything}
     meta = {'indexes': ['url','identifiers','authors','published_on',
-                        'added_on','updates','tags']}
+                        'added_on','updates','tags','description.ngram_prob']}
